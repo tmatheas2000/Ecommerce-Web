@@ -1,0 +1,34 @@
+.card{
+    margin-bottom: 20px;
+    height: 550px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none;
+}
+.card img{
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+.card-body{
+    outline: none;
+}
+.card-title{
+    font-weight: 500;
+}
+.cart{
+    margin-right: 15px;
+}
+.right{
+    float: right;
+}
+.margin{
+    margin-top: 100px;
+}
+.card-text{
+    padding-left: 15px;
+}
+.add{
+    cursor: pointer;
+}

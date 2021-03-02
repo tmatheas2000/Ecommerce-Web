@@ -1,0 +1,30 @@
+<div class="container-fluid margin justify-content-center">
+    <div class="offset-md-1 col-md-10">
+        <div class="row" *ngIf="product">
+            <div class="col-sm-6">
+                <div class="card">
+                    <img [src]="product.image" routerLink="/details/{{product.id}}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body" routerLink="/details/{{product.id}}">
+                        <h1 class="card-title">{{product.title}}</h1><br>
+                        <span>{{product.description}}</span>
+                        <h2 class="mt-3">Price : Rs.{{product.price}}</h2>
+                        <h3>Category : {{product.category}}</h3>
+                        <h3>Stock Available : 5</h3>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-block btn-primary" (click)="addToCart()">
+                            <div class="d-flex justify-content-center">
+                                <mat-icon class="mr-2">add_shopping_cart</mat-icon>
+                                <span>Add to Cart</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
