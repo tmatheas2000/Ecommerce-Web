@@ -16,44 +16,30 @@ export class CartComponent implements OnInit {
   total_price: number;
   total_quantity: number;
   total: string;
+  loading: boolean = true;
 
   constructor(private backend: BackendService,
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.backend.getAllCart().then(res=>{
-      this.cart=res;
-      this.cart=this.cart.filter(res=>res.userId==3);
-      this.cart.forEach(res=>{
-        res.products.forEach(product=>{
-          this.backend.getProductDetails(product.productId).then(data=>{
-            this.product=data;
-            this.product.quantity=product.quantity;
-            this.products.push(this.product);
-          })
-        })
-      })
-    });
-    setTimeout(() => {
+    this.backend.getCartProducts().then(res =>{
+      this.loading = false;
+      this.products = res;
       this.calculate();
-    }, 5000)
+    })
   }
 
   removeItem(id){
-    this.products = this.products.filter(product => product.id !== id);
     this.calculate();
-    this.openSnackBar("Item Removed Successfully !");
-  }
-
-  removeAll(){
-    this.products=[];
-    this.calculate();
-    this.openSnackBar("Items Removed Successfully !");
-
+    this.backend.removeProduct(id).then(()=>{
+      this.products = this.products.filter(product => product.id !== id);
+    });
   }
 
   placeOrder(){
-    this.openSnackBar("Order Placed Successfully !");
+    this.backend.placeOrder(this.products).then(()=>{
+      this.products = [];
+    });
   }
 
   calculate(){
@@ -62,15 +48,8 @@ export class CartComponent implements OnInit {
     this.products.forEach(product=>{
       this.total_price=this.total_price+(product.price*product.quantity);
       this.total_quantity+=product.quantity;
-    })
-    this.total=this.total_price.toFixed(2);
-  }
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, '', {
-      duration: 4000,
-      verticalPosition: 'bottom',
     });
+    this.total=this.total_price.toFixed(2);
   }
 
 }

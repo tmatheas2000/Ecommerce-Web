@@ -1,16 +1,16 @@
 <div class="container-fluid margin">
-    <div class="row">
-        <div class="offset-1 col-10 col-md-7">
-            <div class="row product" *ngFor="let product of products">
-                <div class="col-5 col-md-4 col-xl-3">
+    <div class="row px-5" *ngIf="!loading && products.length">
+        <div class="col-12 col-lg-7">
+            <div class="row product p-2" *ngFor="let product of products">
+                <div class="col-sm-5 col-md-4 col-xl-3">
                     <img class="card-img mt-2" height="220" [src]="product.image" routerLink="/details/{{product.id}}">
                 </div>
-                <div class="col-7 col-md-8 col-xl-9">
+                <div class="col-sm-7 col-md-8 col-xl-9">
                     <h2 class="mt-2">{{product.title}}</h2>
                     <h3>Quantity: {{product.quantity}}</h3>
                     <h4>Category: {{product.category}}</h4>
-                    <span>Price : {{product.price}}</span><br>
-                    <button class="btn btn-primary mt-3" (click)="removeItem(product.id)">
+                    <span>Price : Rs.<span class="price">{{product.price}}</span></span><br>
+                    <button class="btn btn-danger mt-3" (click)="removeItem(product.id)">
                         <div class="d-flex justify-content-center">
                             <mat-icon>remove_shopping_cart</mat-icon>
                             <span>Remove</span>
@@ -19,18 +19,25 @@
                 </div>
             </div>
         </div>
-        <div class="offset-1 offset-md-0 col-10 col-md-4">
-            <div class="card">
+        <div class="offset-lg-1 col-12 col-lg-4">
+            <div class="card mb-3">
                 <div class="card-title m-4">
                     <h3>Total Item : {{total_quantity}}</h3>
-                    <h1>Total Amount : Rs.{{total}}</h1>
+                    <h1>Total Amount : Rs.<spam class="price">{{total}}</spam></h1>
                     <span>No Delivery charge !</span>
                 </div>
                 <div class="card-body">
                     <button class="btn btn-success mt-1 ml-2" (click)="placeOrder()">Place Order</button>
-                    <button class="btn btn-warning mt-1 ml-2" (click)="removeAll()">Remove All</button>
+                    <button class="btn btn-primary mt-1 ml-2" [routerLink]="['']">Continue Shopping</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!loading && !products.length">
+        <div class="offset-1 col-10 col-md-7">
+            <h1>Your Cart is empty.</h1>
+            <button class="btn btn-success mt-1 ml-2" [routerLink]="['']" routerLinkActive="router-link-active">Shop
+                Now</button>
         </div>
     </div>
 </div>

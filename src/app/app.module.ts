@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

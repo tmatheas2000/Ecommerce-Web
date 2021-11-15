@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="">Shopping</a>
-      <div class="cart-label d-flex" routerLink="/cart">
+      <div class="cart-label d-flex" [routerLink]="['/cart']" routerLinkActive="active" >
         <mat-icon class="mr-2">shopping_cart</mat-icon>
         <span>Cart</span>
       </div>

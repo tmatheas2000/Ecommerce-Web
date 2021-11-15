@@ -28,14 +28,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(){
-    this.openSnackBar("Item Added To Cart !");
+    this.product.quantity = 1;
+    this.backend.addToCart(this.product);
   }
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, '', {
-      duration: 4000,
-      verticalPosition: 'bottom',
-    });
-  }
-
 }
